@@ -1,28 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="styles/style.css">
-</head>
-<body class="login">
-  <div class="container">
-    <div class="form-box">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/style.css" />
+  </head>
+  <body class="login">
+    <div class="container cont_cad">
+      <div class="form-box">
         <h2>Bem vindo!</h2>
         <p>CADASTRE-SE</p>
         <form>
-            <input type="text" placeholder="Nome" required>
-            <input type="email" placeholder="E-mail" required>
-            <input type="password" placeholder="Senha" required>
-            <input type="password" placeholder="Confirmação de senha" required>
-            <div class="buttons">
-                <button type="button" class="login-btn">Já tenho conta</button>
-                <button type="submit" class="register-btn">Cadastrar</button>
-            </div>
+          <input class="dados_login" type="text" placeholder="Nome" required />
+          <input
+            class="dados_login"
+            type="email"
+            placeholder="E-mail"
+            required
+          />
+          <input
+            class="dados_login"
+            type="password"
+            placeholder="Senha"
+            required
+          />
+          <input
+            class="dados_login"
+            type="password"
+            placeholder="Confirmação de senha"
+            required
+          />
+          <div class="buttons buttons_cad">
+            <button class="bt_transp bt_criar_conta" type="button" class="login-btn">
+              Já tenho conta
+            </button>
+            <button class="bt_back_rosa bt_cadastrar" type="submit" class="register-btn">
+              Cadastrar
+            </button>
+          </div>
         </form>
+      </div>
     </div>
-</div>
-<script src="/scripts/script.js"></script>
-</body>
+    <script src="/scripts/script.js"></script>
+  </body>
 </html>

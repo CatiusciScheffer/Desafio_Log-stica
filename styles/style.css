@@ -1,24 +1,23 @@
 /* Variáveis Globais */
 :root {
-  --primary-color: #2E8B57;
-  --secondary-color: #87CEEB;
+  --primary-color: #2e8b57;
+  --secondary-color: #87ceeb;
   --white-color: rgba(255, 255, 255, 1);
   --background-overlay: rgba(255, 255, 255, 0.085);
   --background_input: rgba(217, 217, 217, 0.29);
-  --text-color: #FFE5FF;
-  --text-color_branco_transp : rgba(255, 255, 255, 0.7);
+  --text-color: #ffe5ff;
+  --text-color_branco_transp: rgba(255, 255, 255, 0.7);
   --text-color_vd: rgba(0, 129, 113, 1);
   --button-bg: pink;
-  --color_pink:rgba(255, 223, 255, 1);
+  --color_pink: rgba(255, 223, 255, 1);
   --font-primary: 'Century Gothic', Arial, sans-serif;
-
 }
 
 /* Importando Fontes */
 @font-face {
   font-family: 'CustomFont';
   src: url('assets/fonts/CustomFont.woff2') format('woff2'),
-       url('assets/fonts/CustomFont.woff') format('woff');
+    url('assets/fonts/CustomFont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,7 +25,7 @@
 @font-face {
   font-family: 'Century Gothic';
   src: url('assets/fonts/GOTHIC.woff2') format('woff2'),
-       url('assets/fonts/GOTHIC.woff') format('woff');
+    url('assets/fonts/GOTHIC.woff') format('woff');
   font-weight: 400; /* Regular */
   font-style: normal;
 }
@@ -34,7 +33,7 @@
 @font-face {
   font-family: 'Century Gothic';
   src: url('assets/fonts/GOTHICB.woff2') format('woff2'),
-       url('assets/fonts/GOTHICB.woff') format('woff');
+    url('assets/fonts/GOTHICB.woff') format('woff');
   font-weight: 700; /* Bold */
   font-style: normal;
 }
@@ -64,8 +63,8 @@ body.login {
 
 /* Container Central */
 .container {
-  background: var(--background-overlay); 
-  padding: 39px clamp(50px, 10vw, 216px);
+  background: var(--background-overlay);
+  padding: 69px clamp(50px, 10vw, 216px);
   border-radius: 24px;
   text-align: center;
   backdrop-filter: blur(10px);
@@ -75,15 +74,22 @@ body.login {
   max-width: 849px;
 
   height: 60%;
-  min-height: 603px;
-  max-height: 603px;
-
- 
 }
 
+.cont_login {
+  min-height: 603px;
+  max-height: 603px;
+}
+
+.cont_cad {
+  min-height: 737px;
+  max-height: 737px;
+  margin: 60px 0px 60px 0px;
+}
 
 /* Tipografia */
-h2, p {
+h2,
+p {
   color: var(--text-color);
   font-size: 32.64px;
 }
@@ -101,7 +107,7 @@ p {
 }
 
 /* Campos de Entrada */
-.dados_login{
+.dados_login {
   margin-bottom: 24px;
   width: 100%;
   height: 49px;
@@ -117,33 +123,32 @@ p {
 .options {
   display: flex;
   flex-direction: row;
-  justify-content:start;
+  justify-content: start;
   text-align: left;
   color: var(--white-color);
   margin-bottom: 51px;
 }
 
-input[type="checkbox"].manterConectado {
-  -webkit-appearance: none; 
-  -moz-appearance: none; 
-  appearance: none; 
+input[type='checkbox'].manterConectado {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 14px;
   height: 14px;
   border: 1px solid var(--white-color);
   border-radius: 2px;
   margin-right: 5px;
   background-color: transparent;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
-input[type="checkbox"].manterConectado:checked {
-  background-color: var(--white-color); 
+input[type='checkbox'].manterConectado:checked {
+  background-color: var(--white-color);
 }
 
-label{
+label {
   width: 280px;
 }
-
 
 /* Esqueci a Senha */
 .forgot {
@@ -158,29 +163,54 @@ label{
 .buttons {
   display: flex;
   justify-content: space-between;
-  gap: 10px;  
+  gap: 10px;
   cursor: pointer;
 }
 
-.bt_criar_conta{
+.bt_transp {
   margin-right: 20px;
   border: 1px solid var(--color_pink);
   border-radius: 8px;
   background-color: #f4f4f400;
-  min-width: 115px;
-  height: 37px;
   color: var(--white-color);
+  height: 37px;
+  width: 50%;
+  
 }
 
-.bt_login{
+.bt_back_rosa {
   border: 1px solid var(--color_pink);
   border-radius: 8px;
   background-color: var(--color_pink);
-  min-width: 155px;
   height: 36px;
   color: var(--text-color_vd);
+  width: 50%;
+  
 }
 
+.bt_criar_conta{
+  min-width: 115px;
+  max-width: 115px;
+}
+
+.bt_login{
+  min-width: 155px;
+  max-width: 268px;
+}
+
+.bt_tenho_conta{
+  min-width: 133px; 
+  max-width: 133px;
+}
+
+.bt_cadastrar{
+  /* min-width: 250px; */
+  max-width: 250px; 
+}
+
+.buttons_cad{  
+  padding-top:27px;
+}
 
 .register {
   background: transparent;
@@ -191,6 +221,10 @@ label{
 .login {
   background: var(--button-bg);
   color: var(--text-color);
+}
+
+.bt_cadastro {
+  margin-top: 27px;
 }
 
 /* ----- Estilos da Página Principal ----- */
