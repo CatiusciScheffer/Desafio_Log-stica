@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | Logística Columbus</title>
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="icon" type="image/x-icon" href="styles/favicon.ico">
   </head>
   <body class="login">
     <div class="container cont_login">
@@ -39,25 +40,27 @@
           <div class="modal-content">
             <span class="close">&times;</span>
             <h2 class="tit_recuperar">Recuperar Senha</h2>
-            <p class="txt_recuperar">Digite seu e-mail para receber um link de redefinição.</p>
-            <input class="dados_login"
+            <p class="txt_recuperar">
+              Digite seu e-mail para receber um link de redefinição.
+            </p>
+            <input
+              class="dados_login"
               type="email"
               id="forgotEmail"
               placeholder="E-mail"
-              required
             />
-            <Button class="bt_back_rosa" id="sendResetLink">Enviar</Button>
+            <button class="bt_primary" id="sendResetLink">Enviar</button>
           </div>
         </div>
         <!-- Fim Modal  -->
         <div class="buttons">
-          <button class="bt_transp bt_criar_conta" type="button">
+          <button class="bt_secundary bt_criar_conta" type="button">
             Criar conta
           </button>
-          <button class="bt_back_rosa bt_login" type="submit">Logar</button>
+          <button class="bt_primary bt_login" type="submit">Logar</button>
         </div>
       </form>
     </div>
-    <script src="/scripts/script.js"></script>
+    <script src="/scripts/script.js" defer></script>
   </body>
 </html>

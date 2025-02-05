@@ -2,33 +2,44 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>Redefinir Senha</title>
+    <title>Redefinir Senha | Logística Columbus</title>
+    <link rel="icon" type="image/x-icon" href="styles/favicon.ico">
+    <link rel="stylesheet" href="styles/style.css" />
   </head>
-  <body>
-    <h2>Redefinir Senha</h2>
-    <input type="password" id="novaSenha" placeholder="Nova senha" required />
-    <button id="confirmarSenha">Confirmar</button>
-
+  <body class="login">
+    <div class="container cont_login content_red_senha">
+      <h2>Redefinir Senha</h2>
+      <input
+        class="dados_login"
+        type="password"
+        id="novaSenha"
+        placeholder="Nova senha"
+        required
+      />
+      <button class="bt_primary bt_red_key" id="confirmarSenha">Confirmar</button>
+    </div>
     <script>
-      document.getElementById("confirmarSenha").addEventListener("click", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const token = urlParams.get("token");
-        const novaSenha = document.getElementById("novaSenha").value;
+      document
+        .getElementById('confirmarSenha')
+        .addEventListener('click', function () {
+          const urlParams = new URLSearchParams(window.location.search);
+          const token = urlParams.get('token');
+          const novaSenha = document.getElementById('novaSenha').value;
 
-        if (!novaSenha) {
-          alert("Digite a nova senha!");
-          return;
-        }
+          if (!novaSenha) {
+            alert('Digite a nova senha!');
+            return;
+          }
 
-        fetch("http://127.0.0.1:5000/redefinir_senha", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token: token, senha: novaSenha }),
-        })
-          .then((response) => response.json())
-          .then((data) => alert(data.mensagem))
-          .catch((error) => console.error("Erro:", error));
-      });
+          fetch('http://127.0.0.1:5000/redefinir_senha', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ token: token, senha: novaSenha }),
+          })
+            .then((response) => response.json())
+            .then((data) => alert(data.mensagem))
+            .catch((error) => console.error('Erro:', error));
+        });
     </script>
   </body>
 </html>

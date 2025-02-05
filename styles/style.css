@@ -49,22 +49,18 @@ body.login {
   border-radius: 24px;
   text-align: center;
   backdrop-filter: blur(10px);
-
   width: 60%;
-  min-width: 400px;
   max-width: 849px;
-
-  height: 60%;
 }
 
 .cont_login {
   min-height: 603px;
-  max-height: 603px;
+  max-height: auto;
 }
 
 .cont_cad {
   min-height: 737px;
-  max-height: 737px;
+  max-height: auto;
   margin: 60px 0px 60px 0px;
 }
 
@@ -143,57 +139,62 @@ label {
 /* Botões */
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 10px;
   cursor: pointer;
 }
 
-.bt_transp {
+.bt_secundary {
   margin-right: 20px;
   border: 1px solid var(--color_pink);
   border-radius: 8px;
   background-color: #f4f4f400;
   color: var(--white-color);
-  height: 37px;
-  width: 50%;  
 }
 
-.bt_back_rosa {
+.bt_primary {
   border: 1px solid var(--color_pink);
   border-radius: 8px;
   background-color: var(--color_pink);
-  height: 36px;
   color: var(--text-color_vd);
-  width: 50%;
-  
 }
 
-.bt_criar_conta{
+.bt_criar_conta {
   min-width: 115px;
   max-width: 115px;
+  width: 50%;
+  height: 37px;
 }
 
-.bt_login{
+.bt_login {
   min-width: 155px;
   max-width: 268px;
+  width: 50%;
+  height: 36px;
 }
 
-.bt_tenho_conta{
-  min-width: 133px; 
+.bt_tenho_conta {
+  min-width: 133px;
   max-width: 133px;
+  width: 50%;
+  height: 37px;
 }
 
-.bt_cadastrar{
-  /* min-width: 250px; */
-  max-width: 250px; 
+.bt_cadastrar {
+  width: 50%;
+  height: 36px;
+  max-width: 250px;
 }
 
-.buttons_cad{  
-  padding-top:27px;
+.buttons_cad {
+  padding-top: 27px;
 }
 
-.bt_cadastro {
-  margin-top: 27px;
+.bt_red_key{
+  width: 100%;
+  height: 36px;
+  margin-top: 30px;
 }
 
 /* ----- Estilos da Página Principal ----- */
@@ -284,17 +285,16 @@ body.main {
   color: var(--text-color);
 }
 
-
 /* modal recuperar senha */
 .modal {
-  display: none; 
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background: url('/assets/images/background.svg') no-repeat center center;
-  background-size:auto;
+  background-size: auto;
   justify-content: center;
   align-items: center;
 }
@@ -305,15 +305,23 @@ body.main {
   background: var(--background-overlay);
 }
 
-.close{
+.close {
   font-size: 26px;
 }
 
-.tit_recuperar{
+.tit_recuperar {
   font-size: 20px;
 }
 
-.txt_recuperar{
+.txt_recuperar {
   font-size: 16px;
 }
 
+/* Formulário redefinição de senha */
+.content_red_senha {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: auto;
+}
