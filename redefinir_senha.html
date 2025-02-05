@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redefinir Senha</title>
+  </head>
+  <body>
+    <h2>Redefinir Senha</h2>
+    <input type="password" id="novaSenha" placeholder="Nova senha" required />
+    <button id="confirmarSenha">Confirmar</button>
+
+    <script>
+      document.getElementById("confirmarSenha").addEventListener("click", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get("token");
+        const novaSenha = document.getElementById("novaSenha").value;
+
+        if (!novaSenha) {
+          alert("Digite a nova senha!");
+          return;
+        }
+
+        fetch("http://127.0.0.1:5000/redefinir_senha", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token: token, senha: novaSenha }),
+        })
+          .then((response) => response.json())
+          .then((data) => alert(data.mensagem))
+          .catch((error) => console.error("Erro:", error));
+      });
+    </script>
+  </body>
+</html>

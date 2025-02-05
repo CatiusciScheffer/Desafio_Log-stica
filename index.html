@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Logística Columbus</title>
+    <title>Login | Logística Columbus</title>
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body class="login">
@@ -27,21 +27,34 @@
           placeholder="Senha"
           required
         />
-
         <div class="options">
-          <input class="manterConectado" type="checkbox" id="manterConectado" />
+          <input type="checkbox" id="manterConectado" />
           <label for="manterConectado">Manter conectado</label>
         </div>
 
         <a href="#" class="forgot">Esqueci minha senha</a>
 
+        <!-- Modal para recuperar a senha -->
+        <div id="forgotPasswordModal" class="container modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="tit_recuperar">Recuperar Senha</h2>
+            <p class="txt_recuperar">Digite seu e-mail para receber um link de redefinição.</p>
+            <input class="dados_login"
+              type="email"
+              id="forgotEmail"
+              placeholder="E-mail"
+              required
+            />
+            <Button class="bt_back_rosa" id="sendResetLink">Enviar</Button>
+          </div>
+        </div>
+        <!-- Fim Modal  -->
         <div class="buttons">
-          <button class="bt_transp bt_criar_conta" type="button" class="register">
+          <button class="bt_transp bt_criar_conta" type="button">
             Criar conta
           </button>
-          <button class="bt_back_rosa bt_login" type="submit" class="login">
-            Logar
-          </button>
+          <button class="bt_back_rosa bt_login" type="submit">Logar</button>
         </div>
       </form>
     </div>

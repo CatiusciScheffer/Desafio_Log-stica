@@ -1,7 +1,7 @@
 /* Variáveis Globais */
 :root {
+  --font-primary: 'Century Gothic', Arial, sans-serif;
   --primary-color: #2e8b57;
-  --secondary-color: #87ceeb;
   --white-color: rgba(255, 255, 255, 1);
   --background-overlay: rgba(255, 255, 255, 0.085);
   --background_input: rgba(217, 217, 217, 0.29);
@@ -10,31 +10,14 @@
   --text-color_vd: rgba(0, 129, 113, 1);
   --button-bg: pink;
   --color_pink: rgba(255, 223, 255, 1);
-  --font-primary: 'Century Gothic', Arial, sans-serif;
 }
 
 /* Importando Fontes */
 @font-face {
   font-family: 'CustomFont';
-  src: url('assets/fonts/CustomFont.woff2') format('woff2'),
-    url('assets/fonts/CustomFont.woff') format('woff');
+  src: url('/assets/fonts/CustomFont.woff2') format('woff2'),
+    url('/assets/fonts/CustomFont.woff') format('woff');
   font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Century Gothic';
-  src: url('assets/fonts/GOTHIC.woff2') format('woff2'),
-    url('assets/fonts/GOTHIC.woff') format('woff');
-  font-weight: 400; /* Regular */
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Century Gothic';
-  src: url('assets/fonts/GOTHICB.woff2') format('woff2'),
-    url('assets/fonts/GOTHICB.woff') format('woff');
-  font-weight: 700; /* Bold */
   font-style: normal;
 }
 
@@ -48,12 +31,10 @@
 
 /* Estilo Geral */
 body {
-  /*background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));*/
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-style: 'Century Gothic';
 }
 
 body.login {
@@ -129,7 +110,7 @@ p {
   margin-bottom: 51px;
 }
 
-input[type='checkbox'].manterConectado {
+input[type='checkbox']#manterConectado {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -142,7 +123,7 @@ input[type='checkbox'].manterConectado {
   cursor: pointer;
 }
 
-input[type='checkbox'].manterConectado:checked {
+input[type='checkbox']#manterConectado:checked {
   background-color: var(--white-color);
 }
 
@@ -174,8 +155,7 @@ label {
   background-color: #f4f4f400;
   color: var(--white-color);
   height: 37px;
-  width: 50%;
-  
+  width: 50%;  
 }
 
 .bt_back_rosa {
@@ -210,17 +190,6 @@ label {
 
 .buttons_cad{  
   padding-top:27px;
-}
-
-.register {
-  background: transparent;
-  color: var(--text-color);
-  border: 1px solid var(--button-border);
-}
-
-.login {
-  background: var(--button-bg);
-  color: var(--text-color);
 }
 
 .bt_cadastro {
@@ -314,3 +283,37 @@ body.main {
   font-size: 24px;
   color: var(--text-color);
 }
+
+
+/* modal recuperar senha */
+.modal {
+  display: none; 
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/assets/images/background.svg') no-repeat center center;
+  background-size:auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  width: 100%;
+  height: 100%;
+  background: var(--background-overlay);
+}
+
+.close{
+  font-size: 26px;
+}
+
+.tit_recuperar{
+  font-size: 20px;
+}
+
+.txt_recuperar{
+  font-size: 16px;
+}
+

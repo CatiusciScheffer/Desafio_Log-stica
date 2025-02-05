@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Cadastro | Logística Columbus</title>
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body class="login">
@@ -11,31 +11,40 @@
       <div class="form-box">
         <h2>Bem vindo!</h2>
         <p>CADASTRE-SE</p>
-        <form>
-          <input class="dados_login" type="text" placeholder="Nome" required />
+        <form id="cadastroForm">
+          <input
+            class="dados_login"
+            type="text"
+            id="nome"
+            placeholder="Nome"
+            required
+          />
           <input
             class="dados_login"
             type="email"
+            id="email"
             placeholder="E-mail"
             required
           />
           <input
             class="dados_login"
             type="password"
+            id="senha"
             placeholder="Senha"
             required
           />
           <input
             class="dados_login"
             type="password"
+            id="confirmSenha"
             placeholder="Confirmação de senha"
             required
           />
           <div class="buttons buttons_cad">
-            <button class="bt_transp bt_criar_conta" type="button" class="login-btn">
+            <button class="bt_transp bt_criar_conta" type="button">
               Já tenho conta
             </button>
-            <button class="bt_back_rosa bt_cadastrar" type="submit" class="register-btn">
+            <button class="bt_back_rosa bt_cadastrar" type="submit">
               Cadastrar
             </button>
           </div>
