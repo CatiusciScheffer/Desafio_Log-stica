@@ -4,12 +4,14 @@
   --primary-color: #2e8b57;
   --white-color: rgba(255, 255, 255, 1);
   --background-overlay: rgba(255, 255, 255, 0.085);
-  --background_input: rgba(217, 217, 217, 0.29);
+  --background_input: rgba(217, 217, 217, 0.20);
   --text-color: #ffe5ff;
   --text-color_branco_transp: rgba(255, 255, 255, 0.7);
-  --text-color_vd: rgba(0, 129, 113, 1);
+  --text-color_vd: #008171;
+  --text-color-bk: #444444;
+  --text-color-Terc:#E7E1CB;
   --button-bg: pink;
-  --color_pink: rgba(255, 223, 255, 1);
+  --color_pink: #ffdfff;
 }
 
 /* Importando Fontes */
@@ -35,12 +37,23 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
+  overflow: hidden; 
 }
 
 body.login {
   background: url('/assets/images/background.svg') no-repeat center center;
   background-size: cover;
 }
+
+.container_principal {
+  display: flex;
+  width: 100vw; 
+  height: 100vh; 
+  margin: 0; 
+  padding: 20px;
+}
+
 
 /* Container Central */
 .container {
@@ -83,6 +96,27 @@ p {
   font-weight: 300;
 }
 
+input[type='checkbox']#manterConectado {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--white-color);
+  border-radius: 2px;
+  margin-right: 5px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input[type='checkbox']#manterConectado:checked {
+  background-color: var(--white-color);
+}
+
+label {
+  width: 280px;
+}
+
 /* Campos de Entrada */
 .dados_login {
   margin-bottom: 24px;
@@ -104,27 +138,6 @@ p {
   text-align: left;
   color: var(--white-color);
   margin-bottom: 51px;
-}
-
-input[type='checkbox']#manterConectado {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  border: 1px solid var(--white-color);
-  border-radius: 2px;
-  margin-right: 5px;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-input[type='checkbox']#manterConectado:checked {
-  background-color: var(--white-color);
-}
-
-label {
-  width: 280px;
 }
 
 /* Esqueci a Senha */
@@ -191,98 +204,10 @@ label {
   padding-top: 27px;
 }
 
-.bt_red_key{
+.bt_width_100 {
   width: 100%;
   height: 36px;
   margin-top: 30px;
-}
-
-/* ----- Estilos da Página Principal ----- */
-body.main {
-  display: flex;
-  height: 100vh;
-  background: var(--main-secondary);
-}
-
-/* Barra Lateral */
-.sidebar {
-  width: 80px;
-  background: var(--sidebar-gradient);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 0;
-}
-
-/* Ícone do Usuário */
-.user-circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid white;
-  margin-bottom: 20px;
-}
-
-/* Ícones do Menu */
-.menu-icons {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.icon {
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-}
-
-/* Conteúdo Principal */
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Barra Superior */
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  background: white;
-}
-
-/* Barra de Pesquisa */
-.search-bar {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.search-bar input {
-  padding: 5px;
-  border: 1px solid var(--main-primary);
-  border-radius: 5px;
-}
-
-/* Botão de Adicionar */
-.add-button {
-  background: var(--main-primary);
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-/* Área de Conteúdo */
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  font-size: 24px;
-  color: var(--text-color);
 }
 
 /* modal recuperar senha */
@@ -297,6 +222,7 @@ body.main {
   background-size: auto;
   justify-content: center;
   align-items: center;
+  border-radius: 24px;
 }
 
 .modal-content {
@@ -306,7 +232,8 @@ body.main {
 }
 
 .close {
-  font-size: 26px;
+  font-size: 44px;
+  color: var(--text-color);
 }
 
 .tit_recuperar {
@@ -324,4 +251,151 @@ body.main {
   justify-content: center;
   align-items: center;
   min-width: auto;
+}
+
+/* =================================================== */
+/* Página Principal */
+/* =================================================== */
+/* ----- Barra Lateral ----- */
+.sidebar {
+  min-width: 100px;
+  min-height:400px;
+  max-height: 100%;  
+  background: url('/assets/images/background.svg') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  margin-right: 20px;
+  border-radius: 50px;
+}
+
+/* Contêiner para posicionar os círculos */
+.circle-container {
+  position: relative; /* Define um referencial para os círculos */
+  width: 68px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+/* Círculo externo */
+.user-circle {
+  position: absolute;
+  min-width: 68px;
+  max-width: 68px;
+  min-height: 68px;
+  max-height: 68px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: transparent;
+}
+
+/* Círculo interno */
+.user-circle-int {
+  position: absolute;
+  width: 50px; 
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+/* Ícones do Menu */
+.menu-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.icon {
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ----- Conteúdo Principal ----- */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- Barra Superior ----- */
+.top-bar {
+  height: 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Nome do Usuário */
+.user-name {
+  font-size: 20px;
+  color: var(--text-color-bk);
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 304px;
+}
+
+.icon {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.input-wrapper input {
+  padding: 8px 8px 8px 32px; /* Deixa espaço para o ícone */
+  border: 1px solid var(--text-color_vd);
+  border-radius: 8px;
+  outline: none;
+  width: 100%;
+  height: 35px;
+  color: var(--text-color_vd);
+}
+
+/* ----- Botão de Adicionar ----- */
+.add-button {
+  width: 65px;
+  height: 35px;
+  background: var(--text-color_vd);
+  color: var(--text-color-Terc);
+  border-style:unset;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* ----- Área de Conteúdo ----- */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  font-size: 24px;
+  color: var(--text-color);
+  background: var(--background_input);
+  border-radius: 16px;
+  margin-top: 20px;
 }

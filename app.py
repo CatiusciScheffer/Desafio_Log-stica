@@ -8,6 +8,7 @@ import os
 import smtplib
 import secrets
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__)
 CORS(app)
@@ -116,10 +117,38 @@ def enviar_email(destinatario, link):
 
     print(f"🔹 Enviando e-mail para: {destinatario}")  # DEBUG
 
-    msg = MIMEText(f"Clique no link para redefinir sua senha: {link}")
-    msg["Subject"] = "Recuperação de Senha"
+    # Corpo do e-mail em HTML
+    html_content = f"""
+    <html>
+    <body style="font-family: Arial, sans-serif; color: #333;">
+        <h2 style="color: #444444;">Recuperação de Senha - Columbus</h2>
+        <p>Olá,</p>
+        <p>Recebemos uma solicitação para redefinir sua senha de acesso à plataforma da <strong>Columbus</strong>.</p>
+        <p>Se foi você quem solicitou, clique no botão abaixo para criar uma nova senha:</p>
+        <p style="text-align: center;">
+            <a href="{link}" style="
+                display: inline-block;
+                background-color: #ffdfff;
+                color: #008171;
+                padding: 12px 20px;
+                text-decoration: none;
+                border-radius: 8px;
+                font-size: 16px;
+            ">Redefinir Senha</a>
+        </p>
+        <p>Se você não solicitou esta alteração, ignore este e-mail. Sua senha permanecerá a mesma.</p>
+        <p>Atenciosamente,</p>
+        <p><strong>Equipe Columbus</strong><br>
+        Suporte Técnico</p>
+    </body>
+    </html>
+    """
+
+    msg = MIMEMultipart()
+    msg["Subject"] = "Columbus | Recuperação de Senha"
     msg["From"] = remetente
     msg["To"] = destinatario
+    msg.attach(MIMEText(html_content, "html"))
 
     try:
         with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:

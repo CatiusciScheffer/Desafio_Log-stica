@@ -5,31 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard | Logística Columbus</title>
     <link rel="stylesheet" href="styles/style.css" />
-    <link rel="icon" type="image/x-icon" href="styles/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
   </head>
   <body>
-    <div class="sidebar">
-      <div class="user-circle"></div>
-      <div class="menu-icons">
-        <span class="icon">★</span>
-        <span class="icon">★</span>
-        <span class="icon">★</span>
-        <span class="icon">★</span>
-      </div>
-    </div>
-    <div class="main-content">
-      <div class="top-bar">
-        <span class="user-name">{NOME USUÁRIO}</span>
-        <div class="search-bar">
-          <input type="text" placeholder="Pesquisar" />
-          <button>🔍</button>
+    <div class="container_principal">
+      <div class="sidebar">
+        <div class="circle-container">
+          <div class="user-circle"></div>
+          <div class="user-circle-int"></div>
         </div>
-        <button class="add-button">+</button>
+        <div class="menu-icons">
+          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          /></span>
+          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          /></span>
+          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          /></span>
+          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          /></span>
+        </div>
       </div>
-      <div class="content">
-        <h1>*espaço criativo*</h1>
+      <div class="main-content">
+        <div class="top-bar">
+          <span class="user-name">{NOME USUÁRIO}</span>
+          <div class="search-bar">
+            <div class="input-wrapper">
+              <span class="icon">
+                <img
+                  src="/assets/images/icon-Search.png"
+                  alt="Pesquisar"
+                  class="search-icon"
+                />
+              </span>
+              <input type="text" placeholder="Pesquisar" />
+            </div>
+            <button class="add-button">+</button>
+          </div>
+        </div>
+        <div class="content">
+          <h1>*espaço criativo*</h1>
+        </div>
       </div>
     </div>
-    <script src="/scripts/script.js" defer></script>
+    <script src="scripts/script.js" defer></script>
   </body>
 </html>

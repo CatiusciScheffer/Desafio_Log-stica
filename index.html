@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login | Logística Columbus</title>
     <link rel="stylesheet" href="styles/style.css" />
-    <link rel="icon" type="image/x-icon" href="styles/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
   </head>
   <body class="login">
     <div class="container cont_login">
@@ -36,8 +36,8 @@
         <a href="#" class="forgot">Esqueci minha senha</a>
 
         <!-- Modal para recuperar a senha -->
-        <div id="forgotPasswordModal" class="container modal">
-          <div class="modal-content">
+        <div id="forgotPasswordModal" class="modal">
+          <div class="container cont_login modal-content">
             <span class="close">&times;</span>
             <h2 class="tit_recuperar">Recuperar Senha</h2>
             <p class="txt_recuperar">
@@ -49,10 +49,11 @@
               id="forgotEmail"
               placeholder="E-mail"
             />
-            <button class="bt_primary" id="sendResetLink">Enviar</button>
+            <button class="bt_primary bt_width_100" id="sendResetLink">Enviar</button>
           </div>
         </div>
         <!-- Fim Modal  -->
+
         <div class="buttons">
           <button class="bt_secundary bt_criar_conta" type="button">
             Criar conta
