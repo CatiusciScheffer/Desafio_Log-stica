@@ -1,9 +1,10 @@
 let pedidos = [];
 let pedidoEditandoId = null;
 
+// 🔹 Atualizar Pedido
 function atualizarListaPedidos(pedidos) {
   const tabela = document.getElementById('tabela-pedidos');
-  tabela.innerHTML = ''; // Limpa a tabela antes de preencher
+  tabela.innerHTML = '';
 
   pedidos.forEach((pedido) => {
     const row = document.createElement('tr');
@@ -20,7 +21,6 @@ function atualizarListaPedidos(pedidos) {
     tabela.appendChild(row);
   });
 
-  // 🔹 Agora os elementos existem no DOM, então adicionamos os eventos:
   document.querySelectorAll('.btn-editar').forEach((botao) => {
     botao.addEventListener('click', (event) => {
       const id = event.target.getAttribute('data-id');
@@ -40,19 +40,18 @@ function atualizarListaPedidos(pedidos) {
   contadorPedidos.textContent = `Total de pedidos: ${pedidos.length}`;
 }
 
+// 🔹 Filtrar Pedidos
 function filtrarPedidos() {
   const termoPesquisa = document
     .getElementById('inputPesquisa')
     .value.toLowerCase()
     .trim();
 
-  // Se o campo de pesquisa estiver vazio, mostrar todos os pedidos
   if (termoPesquisa === '') {
     atualizarListaPedidos(pedidos);
     return;
   }
 
-  // Filtra os pedidos baseado no termo de pesquisa
   const pedidosFiltrados = pedidos.filter((pedido) => {
     return (
       String(pedido.id).includes(termoPesquisa) || // Pesquisa por ID
@@ -62,10 +61,10 @@ function filtrarPedidos() {
     );
   });
 
-  // Atualiza a lista para exibir apenas os pedidos filtrados
   atualizarListaPedidos(pedidosFiltrados);
 }
 
+// // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹 // 🔹
 document.addEventListener('DOMContentLoaded', function () {
   carregarPedidos();
 
@@ -149,14 +148,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---------------- Pedidos --------------------------
+  // 🔹 Lógica para pedidos
   const modalPedido = document.getElementById('modalPedido');
   const btnAdicionar = document.querySelector('.add-button');
   const btnFecharModal = document.querySelector('.close_modal_principal');
-  const btnSalvarPedido = document.getElementById('btnSalvarPedido');
-  const clienteNome = document.getElementById('clienteNome');
-  const destino = document.getElementById('destino');
-  const statusPedido = document.getElementById('statusPedido');
+  // const btnSalvarPedido = document.getElementById('btnSalvarPedido');
+  // const clienteNome = document.getElementById('clienteNome');
+  // const destino = document.getElementById('destino');
+  // const statusPedido = document.getElementById('statusPedido');
 
   // Abre o modal ao clicar no botão "+"
   btnAdicionar.addEventListener('click', () => {
@@ -189,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // 🔹 Lógica para salvar pedido
   document
     .getElementById('btnSalvarPedido')
     .addEventListener('click', async () => {
@@ -235,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
       pedidoEditandoId = null;
     });
 
+  // 🔹 lógica para Filtrar campo pesquisa
   const inputPesquisa = document.getElementById('inputPesquisa');
   const tabelaPedidos = document.getElementById('tabela-pedidos');
 
@@ -373,6 +374,7 @@ function configurarCadastro() {
   }
 }
 
+// 🔹 mensagem na página e não cx
 function mostrarMensagem(tipo, mensagem) {
   const msgDiv = document.getElementById('mensagemErro');
   msgDiv.innerText = mensagem;
@@ -380,6 +382,8 @@ function mostrarMensagem(tipo, mensagem) {
   msgDiv.style.display = 'block';
 }
 
+
+// 🔹 Lógica para excluir pedido
 async function deletarPedido(id) {
   try {
     const response = await fetch(`http://127.0.0.1:5000/pedidos/${id}`, {
@@ -398,6 +402,8 @@ async function deletarPedido(id) {
   }
 }
 
+
+// 🔹 Lógica para atualizar pedidos na tela
 async function carregarPedidos() {
   console.log('Chamando carregarPedidos()...'); // Verificar se a função é chamada
 
@@ -415,6 +421,8 @@ async function carregarPedidos() {
   }
 }
 
+
+// 🔹 Lógica para editar pedidos
 async function editarPedido(idPedido) {
   idPedido = Number(idPedido);
   console.log('ID recebido para edição:', idPedido);
@@ -445,6 +453,8 @@ async function editarPedido(idPedido) {
   document.getElementById('modalPedido').style.display = 'block';
 }
 
+
+// 🔹 lógica para salvar pedido "EDITADO"
 async function salvarEdicaoPedido(idPedido) {
   const clienteNome = document.getElementById('clienteNome').value;
   const destino = document.getElementById('destino').value;

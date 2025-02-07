@@ -17,7 +17,7 @@ CORS(app)
 load_dotenv()
 SECRET_KEY = os.getenv("SECRET_KEY")
 
-
+# 🔹 Trás valores do .env para acesso ao banco
 db_path = os.getenv("DB_PATH")
 if not os.path.exists("database"):
     try:
@@ -25,6 +25,8 @@ if not os.path.exists("database"):
     except Exception as e:
         print(f"Erro ao criar pasta database: {e}")
 
+
+# 🔹 Criar conexão
 def get_db_connection():
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
@@ -75,16 +77,13 @@ def login():
     if not bcrypt.checkpw(senha.encode(), user["user_senha"].encode()):
         return jsonify({"erro": "Senha incorreta!"}), 401
 
-    print(dict(user))  # Verificar no console se o nome está correto
-
-    # 🔹 Ajuste para capturar corretamente o nome do usuário
     nome_usuario = user["user_name"] if "user_name" in user else user[1]
 
     token = jwt.encode(
         {
             "id": user["id"],
             "email": email,
-            "nome": nome_usuario,  # 🔹 Garantindo que o nome vá para o token
+            "nome": nome_usuario, 
             "exp": datetime.now(UTC) + timedelta(hours=1)
         },
         SECRET_KEY,
@@ -93,8 +92,6 @@ def login():
 
     return jsonify({"token": token})
 
-
-            # "exp": datetime.now(UTC) + timedelta(hours=1) 
 
 # 🔹 Rota para recuperar senha
 @app.route("/esqueci_senha", methods=["POST"])
@@ -114,7 +111,7 @@ def esqueci_senha():
     # Salva o token no banco 
     token_expira = datetime.utcnow() + timedelta(hours=1)
     conn = get_db_connection()
-    # conn.execute("UPDATE users SET reset_token_expiration = ? WHERE user_email = ?", (token, email))
+    
     conn.execute("UPDATE users SET reset_token=?, reset_token_expiration=? WHERE user_email=?", 
              (token, token_expira, email))
     conn.commit()
@@ -131,8 +128,6 @@ def esqueci_senha():
 def enviar_email(destinatario, link):
     remetente = os.getenv("SMTP_USER")
     senha = os.getenv("SMTP_PASSWORD")
-
-    print(f"🔹 Enviando e-mail para: {destinatario}")  # DEBUG
 
     # Corpo do e-mail em HTML
     html_content = f"""
