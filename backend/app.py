@@ -138,9 +138,9 @@ def enviar_email(destinatario, link):
     html_content = f"""
     <html>
     <body style="font-family: Arial, sans-serif; color: #333;">
-        <h2 style="color: #444444;">Recuperação de Senha - Columbus</h2>
+        <h2 style="color: #444444;">Recuperação de Senha - Colum...$</h2>
         <p>Olá,</p>
-        <p>Recebemos uma solicitação para redefinir sua senha de acesso à plataforma da <strong>Columbus</strong>.</p>
+        <p>Recebemos uma solicitação para redefinir sua senha de acesso à plataforma da <strong>Colum...$</strong>.</p>
         <p>Se foi você quem solicitou, clique no botão abaixo para criar uma nova senha:</p>
         <p style="text-align: center;">
             <a href="{link}" style="
@@ -155,14 +155,14 @@ def enviar_email(destinatario, link):
         </p>
         <p>Se você não solicitou esta alteração, ignore este e-mail. Sua senha permanecerá a mesma.</p>
         <p>Atenciosamente,</p>
-        <p><strong>Equipe Columbus</strong><br>
+        <p><strong>Equipe Colum...$</strong><br>
         Suporte Técnico</p>
     </body>
     </html>
     """
 
     msg = MIMEMultipart()
-    msg["Subject"] = "Columbus | Recuperação de Senha"
+    msg["Subject"] = "Colum...$ | Recuperação de Senha"
     msg["From"] = remetente
     msg["To"] = destinatario
     msg.attach(MIMEText(html_content, "html"))

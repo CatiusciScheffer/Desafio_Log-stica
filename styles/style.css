@@ -252,7 +252,6 @@ label {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: auto;
 }
 
 /* =================================================== */
@@ -410,6 +409,8 @@ label {
   border-radius: 16px;
   margin-top: 20px;
   text-align: center;
+  min-height:92%;
+  max-height: 400px;
 }
 
 .dashboard {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard | Logística Columbus</title>
+    <title>Dashboard | Logística Colum...$</title>
     <link rel="stylesheet" href="styles/style.css" />
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
   </head>
@@ -41,7 +41,11 @@
                   class="search-icon"
                 />
               </span>
-              <input type="text" id="inputPesquisa" placeholder="Pesquisar pedidos...">
+              <input
+                type="text"
+                id="inputPesquisa"
+                placeholder="Pesquisar pedidos..."
+              />
             </div>
             <button class="add-button">+</button>
           </div>
@@ -50,7 +54,9 @@
           <div class="dashboard">
             <div class="top-dashboard">
               <h2 class="tit-pgPrinc">Pedidos Recentes</h2>
-              <p class="text-pgPrinc" id="contadorPedidos">Total de pedidos: 0</p>
+              <p class="text-pgPrinc" id="contadorPedidos">
+                Total de pedidos: 0
+              </p>
             </div>
 
             <div class="pedido-lista" id="pedidoLista">
@@ -70,7 +76,7 @@
 
           <!-- Modal para adicionar/editar pedidos -->
           <div id="modalPedido" class="modal_principal">
-            <div class="container modal-content_princ">
+            <div class="container modal-content_princ modal-content">
               <span class="close_modal_principal">&times;</span>
               <h2 id="tituloModal">Adicionar Pedido</h2>
 
@@ -81,13 +87,21 @@
                 placeholder="Nome do Cliente"
                 required
               />
-              <input type="text" class="dados_pedido_novo" id="destino" placeholder="Destino" required />
+              <input
+                type="text"
+                class="dados_pedido_novo"
+                id="destino"
+                placeholder="Destino"
+                required
+              />
               <select class="select_pedido_novo" id="statusPedido">
                 <option value="Pendente">Pendente</option>
                 <option value="Entregue">Entregue</option>
               </select>
 
-              <button class="bt_primary bt_width_100" id="btnSalvarPedido">Salvar</button>
+              <button class="bt_primary bt_width_100" id="btnSalvarPedido">
+                Salvar
+              </button>
             </div>
           </div>
         </div>
