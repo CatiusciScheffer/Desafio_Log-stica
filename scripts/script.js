@@ -1,4 +1,5 @@
 let pedidos = [];
+let pedidoEditandoId = null;
 
 function atualizarListaPedidos(pedidos) {
   const tabela = document.getElementById('tabela-pedidos');
@@ -12,7 +13,7 @@ function atualizarListaPedidos(pedidos) {
       <td>${pedido.destino}</td>
       <td>${pedido.status}</td>
       <td>
-        <button class="btn-editar" data-id="${pedido.id}">✏️ Editar</button>
+        <button class="btn-editar" data-id="${pedido.id}" onclick="editarPedido(${pedido.id})">✏️ Editar</button>
         <button class="btn-excluir" data-id="${pedido.id}">🗑️ Excluir</button>
       </td>
     `;
@@ -37,26 +38,37 @@ function atualizarListaPedidos(pedidos) {
   });
 
   contadorPedidos.textContent = `Total de pedidos: ${pedidos.length}`;
-  
 }
 
-
 function filtrarPedidos() {
-  const termoPesquisa = document.getElementById("inputPesquisa").value.toLowerCase();
-  const pedidosFiltrados = pedidos.filter(pedido => {
-    // Para cada pedido, converte todos os valores em string e verifica se contém o termo
-    return Object.values(pedido).some(valor =>
-      String(valor).toLowerCase().includes(termoPesquisa)
+  const termoPesquisa = document
+    .getElementById('inputPesquisa')
+    .value.toLowerCase()
+    .trim();
+
+  // Se o campo de pesquisa estiver vazio, mostrar todos os pedidos
+  if (termoPesquisa === '') {
+    atualizarListaPedidos(pedidos);
+    return;
+  }
+
+  // Filtra os pedidos baseado no termo de pesquisa
+  const pedidosFiltrados = pedidos.filter((pedido) => {
+    return (
+      String(pedido.id).includes(termoPesquisa) || // Pesquisa por ID
+      pedido.cliente.toLowerCase().includes(termoPesquisa) || // Pesquisa pelo nome do cliente
+      pedido.destino.toLowerCase().includes(termoPesquisa) || // Pesquisa pelo destino
+      pedido.status.toLowerCase().includes(termoPesquisa) // Pesquisa pelo status
     );
   });
+
+  // Atualiza a lista para exibir apenas os pedidos filtrados
   atualizarListaPedidos(pedidosFiltrados);
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
-
   carregarPedidos();
-  
+
   // Verifica em qual página estamos para associar os eventos corretamente
   if (document.getElementById('loginForm')) {
     configurarLogin();
@@ -145,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const clienteNome = document.getElementById('clienteNome');
   const destino = document.getElementById('destino');
   const statusPedido = document.getElementById('statusPedido');
-  
 
   // Abre o modal ao clicar no botão "+"
   btnAdicionar.addEventListener('click', () => {
@@ -178,43 +189,83 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
- 
-  // Adiciona um novo pedido ao banco
-  btnSalvarPedido.addEventListener('click', async () => {
-    const novoPedido = {
-      cliente: clienteNome.value,
-      destino: destino.value,
-      status: statusPedido.value,
-    };
+  document
+    .getElementById('btnSalvarPedido')
+    .addEventListener('click', async () => {
+      const clienteNome = document.getElementById('clienteNome').value;
+      const destino = document.getElementById('destino').value;
+      const statusPedido = document.getElementById('statusPedido').value;
 
-    try {
-      const response = await fetch('http://127.0.0.1:5000/pedidos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(novoPedido),
-      });
-
-      if (response.ok) {
-        modalPedido.style.display = 'none';
-        clienteNome.value = '';
-        destino.value = '';
-        statusPedido.value = 'Pendente';
-        carregarPedidos();
-      } else {
-        console.error('Erro ao salvar pedido.');
+      if (!clienteNome || !destino) {
+        alert('Preencha todos os campos!');
+        return;
       }
-    } catch (error) {
-      console.error('Erro ao conectar ao servidor:', error);
-    }
-  });
 
-  const inputPesquisa = document.getElementById("inputPesquisa");
-  if (inputPesquisa) {
-    inputPesquisa.addEventListener("input", filtrarPedidos);
-  } else {
-    console.error("Elemento com id 'inputPesquisa' não foi encontrado no HTML.");
+      // Se `pedidoEditandoId` for `null`, criamos um novo pedido
+      if (pedidoEditandoId === null) {
+        const novoPedido = {
+          cliente: clienteNome,
+          destino: destino,
+          status: statusPedido,
+        };
+
+        try {
+          const response = await fetch('http://127.0.0.1:5000/pedidos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(novoPedido),
+          });
+
+          if (response.ok) {
+            alert('Pedido adicionado com sucesso!');
+            document.getElementById('modalPedido').style.display = 'none';
+            carregarPedidos();
+          } else {
+            console.error('Erro ao adicionar pedido.');
+          }
+        } catch (error) {
+          console.error('Erro ao conectar ao servidor:', error);
+        }
+      } else {
+        // Se `pedidoEditandoId` tem um ID válido, editamos o pedido existente
+        salvarEdicaoPedido(pedidoEditandoId);
+      }
+
+      // Reseta o estado do pedido em edição
+      pedidoEditandoId = null;
+    });
+
+  const inputPesquisa = document.getElementById('inputPesquisa');
+  const tabelaPedidos = document.getElementById('tabela-pedidos');
+
+  if (!tabelaPedidos) {
+    console.error('Erro: Elemento #tabela-pedidos não encontrado.');
+    return;
   }
 
+  inputPesquisa.addEventListener('input', function () {
+    const termoPesquisa = inputPesquisa.value.toLowerCase();
+    const linhas = tabelaPedidos.querySelectorAll('tr'); // Obtém todas as linhas
+
+    linhas.forEach((linha, index) => {
+      if (index === 0) return; // Ignora a primeira linha (cabeçalho)
+
+      const colunas = linha.querySelectorAll('td');
+
+      if (colunas.length === 0) return; // Garante que não tente esconder linhas inválidas
+
+      let encontrado =
+        colunas[0].parentElement.classList.contains('header-row'); // Confere se é uma linha de cabeçalho
+      colunas.forEach((coluna) => {
+        if (coluna.textContent.toLowerCase().includes(termoPesquisa)) {
+          encontrado = true;
+        }
+      });
+
+      // Define a visibilidade correta
+      linha.style.display = encontrado ? '' : 'none';
+    });
+  });
 });
 
 // 🔹 Lógica para login do usuário
@@ -329,7 +380,6 @@ function mostrarMensagem(tipo, mensagem) {
   msgDiv.style.display = 'block';
 }
 
-
 async function deletarPedido(id) {
   try {
     const response = await fetch(`http://127.0.0.1:5000/pedidos/${id}`, {
@@ -348,92 +398,79 @@ async function deletarPedido(id) {
   }
 }
 
-
 async function carregarPedidos() {
+  console.log('Chamando carregarPedidos()...'); // Verificar se a função é chamada
+
   try {
     const response = await fetch('http://127.0.0.1:5000/pedidos');
-    if (!response.ok) throw new Error(`Erro: ${response.status}`);
+    if (!response.ok)
+      throw new Error(`Erro ao buscar pedidos: ${response.status}`);
 
-    // Atribua à variável global "pedidos", sem redeclará-la
-    pedidos = await response.json();
-    console.log('Pedidos recebidos:', pedidos);
+    pedidos = await response.json(); // 🔹 Atualiza a variável global corretamente
+    console.log('Pedidos carregados com sucesso:', pedidos); // Verificar se os pedidos são carregados corretamente
+
     atualizarListaPedidos(pedidos);
   } catch (error) {
     console.error('Erro ao buscar pedidos:', error);
   }
 }
 
-
-function editarPedido(idPedido) {
-  
+async function editarPedido(idPedido) {
   idPedido = Number(idPedido);
+  console.log('ID recebido para edição:', idPedido);
 
-  // Buscar o pedido pelo ID
-  const pedido = pedidos.find(p => p.id == idPedido);
+  if (pedidos.length === 0) {
+    console.log('Pedidos ainda não carregados. Aguardando...');
+    await carregarPedidos();
+  }
+
+  console.log('Lista de pedidos carregada:', pedidos);
+
+  const pedido = pedidos.find((p) => Number(p.id) === idPedido);
 
   if (!pedido) {
-    console.error("Pedido não encontrado!");
+    console.error(`Pedido com ID ${idPedido} não encontrado!`);
     return;
   }
 
-  // Preencher o modal com os dados do pedido selecionado
-  const clienteNome = document.getElementById("clienteNome");
-  const destino = document.getElementById("destino");
-  const statusPedido = document.getElementById("statusPedido");
+  // Preencher os campos do modal com os dados do pedido
+  document.getElementById('clienteNome').value = pedido.cliente;
+  document.getElementById('destino').value = pedido.destino;
+  document.getElementById('statusPedido').value = pedido.status;
 
-  if (!clienteNome || !destino || !statusPedido) {
-    console.error("Elementos do formulário não encontrados.");
-    return;
-  }
+  // Armazena o ID do pedido que está sendo editado
+  pedidoEditandoId = idPedido;
 
-  clienteNome.value = pedido.cliente;
-  destino.value = pedido.destino;
-  statusPedido.value = pedido.status;
-
-  // Exibir o modal de edição (mesmo modal de adição)
-  const modalPedido = document.getElementById("modalPedido");
-  modalPedido.style.display = "block";
-
-  // Alterar o botão para salvar as edições
-  const btnSalvarPedido = document.getElementById("btnSalvarPedido");
-  btnSalvarPedido.onclick = async function () {
-    await salvarEdicaoPedido(idPedido);
-  };
+  // Exibir o modal
+  document.getElementById('modalPedido').style.display = 'block';
 }
 
-
 async function salvarEdicaoPedido(idPedido) {
-  const clienteNome = document.getElementById("clienteNome").value;
-  const destino = document.getElementById("destino").value;
-  const statusPedido = document.getElementById("statusPedido").value;
+  const clienteNome = document.getElementById('clienteNome').value;
+  const destino = document.getElementById('destino').value;
+  const statusPedido = document.getElementById('statusPedido').value;
 
   const pedidoAtualizado = {
     cliente: clienteNome,
     destino: destino,
-    status: statusPedido
+    status: statusPedido,
   };
 
   try {
     const response = await fetch(`http://127.0.0.1:5000/pedidos/${idPedido}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(pedidoAtualizado)
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(pedidoAtualizado),
     });
 
     if (response.ok) {
-      alert("Pedido atualizado com sucesso!");
-      document.getElementById("modalPedido").style.display = "none";
+      alert('Pedido atualizado com sucesso!');
+      document.getElementById('modalPedido').style.display = 'none';
       carregarPedidos(); // Atualiza a lista de pedidos
     } else {
-      console.error("Erro ao atualizar pedido.");
+      console.error('Erro ao atualizar pedido.');
     }
   } catch (error) {
-    console.error("Erro ao conectar ao servidor:", error);
+    console.error('Erro ao conectar ao servidor:', error);
   }
 }
-
-
-
-
