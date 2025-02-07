@@ -205,5 +205,84 @@ def redefinir_senha():
     return jsonify({"mensagem": "Senha redefinida com sucesso!"})
 
 
+# 🔹 Obter um pedido específico para edição
+@app.route("/pedidos/<int:id>", methods=["GET"])
+def obter_pedido(id):
+    conn = get_db_connection()
+    pedido = conn.execute("SELECT * FROM pedidos WHERE id = ?", (id,)).fetchone()
+    conn.close()
+
+    if pedido:
+        return jsonify(dict(pedido))
+    else:
+        return jsonify({"erro": "Pedido não encontrado!"}), 404
+
+
+# 🔹 Listar todos os pedidos
+@app.route("/pedidos", methods=["GET"])
+def listar_pedidos():
+    conn = get_db_connection()
+    pedidos = conn.execute("SELECT * FROM pedidos").fetchall()
+    conn.close()
+
+    return jsonify([dict(pedido) for pedido in pedidos])
+
+# 🔹 Adicionar um novo pedido
+@app.route("/pedidos", methods=["POST"])
+def adicionar_pedido():
+    data = request.get_json()
+    cliente = data.get("cliente")
+    destino = data.get("destino")
+    status = data.get("status", "Pendente")
+
+    if not cliente or not destino:
+        return jsonify({"erro": "Preencha todos os campos!"}), 400
+
+    conn = get_db_connection()
+    conn.execute("INSERT INTO pedidos (cliente, destino, status) VALUES (?, ?, ?)",
+                 (cliente, destino, status))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"mensagem": "Pedido adicionado com sucesso!"}), 201
+
+# 🔹 Editar um pedido existente
+@app.route("/pedidos/<int:id>", methods=["PUT"])
+def editar_pedido(id):
+    data = request.get_json()
+    cliente = data.get("cliente")
+    destino = data.get("destino")
+    status = data.get("status")
+
+    conn = get_db_connection()
+    pedido = conn.execute("SELECT * FROM pedidos WHERE id = ?", (id,)).fetchone()
+
+    if not pedido:
+        return jsonify({"erro": "Pedido não encontrado!"}), 404
+
+    conn.execute("UPDATE pedidos SET cliente = ?, destino = ?, status = ? WHERE id = ?",
+                 (cliente, destino, status, id))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"mensagem": "Pedido atualizado com sucesso!"})
+
+# 🔹 Excluir um pedido
+@app.route("/pedidos/<int:id>", methods=["DELETE"])
+def excluir_pedido(id):
+    conn = get_db_connection()
+    pedido = conn.execute("SELECT * FROM pedidos WHERE id = ?", (id,)).fetchone()
+
+    if not pedido:
+        return jsonify({"erro": "Pedido não encontrado!"}), 404
+
+    conn.execute("DELETE FROM pedidos WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+
+    return jsonify({"mensagem": "Pedido excluído com sucesso!"})
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)

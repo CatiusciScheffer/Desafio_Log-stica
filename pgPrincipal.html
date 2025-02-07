@@ -15,13 +15,17 @@
           <div class="user-circle-int"></div>
         </div>
         <div class="menu-icons">
-          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          <span
+            ><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
           /></span>
-          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          <span
+            ><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
           /></span>
-          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          <span
+            ><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
           /></span>
-          <span><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
+          <span
+            ><img src="/assets/images/star.svg" alt="Estrela" class="star-icon"
           /></span>
         </div>
       </div>
@@ -37,13 +41,54 @@
                   class="search-icon"
                 />
               </span>
-              <input type="text" placeholder="Pesquisar" />
+              <input type="text" id="inputPesquisa" placeholder="Pesquisar pedidos...">
             </div>
             <button class="add-button">+</button>
           </div>
         </div>
         <div class="content">
-          <h1>*espaço criativo*</h1>
+          <div class="dashboard">
+            <div class="top-dashboard">
+              <h2>Pedidos Recentes</h2>
+              <p id="contadorPedidos">Total de pedidos: 0</p>
+            </div>
+
+            <div class="pedido-lista" id="pedidoLista">
+              <!-- Pedidos serão adicionados dinamicamente aqui -->
+              <table id="tabela-pedidos">
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Destino</th>
+                  <th>Status</th>
+                </tr>
+              </table>
+            </div>
+            <canvas id="graficoPedidos"></canvas>
+            <!-- Gráfico de pizza -->
+          </div>
+
+          <!-- Modal para adicionar/editar pedidos -->
+          <div id="modalPedido" class="modal_principal">
+            <div class="modal-content_princ">
+              <span class="close_modal_principal">&times;</span>
+              <h2 id="tituloModal">Adicionar Pedido</h2>
+
+              <input
+                type="text"
+                id="clienteNome"
+                placeholder="Nome do Cliente"
+                required
+              />
+              <input type="text" id="destino" placeholder="Destino" required />
+              <select id="statusPedido">
+                <option value="Pendente">Pendente</option>
+                <option value="Entregue">Entregue</option>
+              </select>
+
+              <button id="btnSalvarPedido">Salvar</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

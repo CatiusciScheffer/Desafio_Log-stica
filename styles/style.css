@@ -390,13 +390,80 @@ label {
 
 /* ----- Área de Conteúdo ----- */
 .content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
   font-size: 24px;
-  color: var(--text-color);
-  background: var(--background_input);
+  color: var(--text-color-bk);
+  background: var(--primary-color);
   border-radius: 16px;
   margin-top: 20px;
+}
+
+.dashboard {
+  width: 100%;
+  padding: 20px;
+}
+
+.top-dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pedido-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.pedido-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: var(--background-input);
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.pedido-card:hover {
+  transform: scale(1.02);
+}
+
+.status-pendente {
+  color: red;
+}
+
+.status-entregue {
+  color: green;
+}
+
+button.editar, button.excluir {
+  margin-left: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.modal_principal {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content_princ {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.close_modal_principal {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
 }
