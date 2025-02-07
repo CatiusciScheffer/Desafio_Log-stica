@@ -62,8 +62,9 @@ body.login {
   border-radius: 24px;
   text-align: center;
   backdrop-filter: blur(10px);
-  width: 60%;
-  max-width: 849px;
+  /* width: 60%;
+  max-width: 849px; */
+  width: clamp(300px, 80%, 849px);
 }
 
 .cont_login {

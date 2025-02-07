@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Redefinir Senha | Logística Columbus</title>
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico"/>
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body class="login">
@@ -39,7 +39,13 @@
             body: JSON.stringify({ token: token, senha: novaSenha }),
           })
             .then((response) => response.json())
-            .then((data) => alert(data.mensagem))
+            .then((data) => {
+              alert(data.mensagem); // Exibe a mensagem retornada
+              if (data.mensagem === 'Senha redefinida com sucesso!') {
+                // Se a resposta for sucesso, redireciona para o login
+                window.location.href = 'index.html'; // Redireciona para a página de login
+              }
+            })
             .catch((error) => console.error('Erro:', error));
         });
     </script>

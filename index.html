@@ -9,6 +9,7 @@
   </head>
   <body class="login">
     <div class="container cont_login">
+      <div id="mensagemErro" class="mensagem-erro"></div>
       <div class="titulo_login">
         <h2>Bem vindo!</h2>
         <p>LOGIN</p>
@@ -19,6 +20,7 @@
           type="email"
           id="email"
           placeholder="E-mail"
+          aria-label="Digite seu e-mail"
           required
         />
         <input
@@ -58,7 +60,7 @@
           <button class="bt_secundary bt_criar_conta" type="button">
             Criar conta
           </button>
-          <button class="bt_primary bt_login" type="submit">Logar</button>
+          <button class="bt_primary bt_login" type="submit" aria-label="Fazer login">Logar</button>
         </div>
       </form>
     </div>
